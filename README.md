@@ -1,4 +1,4 @@
-# ✨ DarkServer Setup Script ✨
+# ✨ DarkStream Setup Script ✨
 
 > **Автоматическая настройка сервера с помощью скрипта от ScumDev**
 
