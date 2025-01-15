@@ -30,10 +30,6 @@
 
 2. Выполните вход на сервер через SSH:
 
-   ```bash
-   ssh user@your-server-ip
-   ```
-
 3. **Подготовьте WireGuard**:
    - Установите WireGuard (если не установлен):
 
@@ -48,12 +44,6 @@
      ```bash
      sudo chmod 600 /etc/wireguard/wg0.conf
      ```
-   - Запустите WireGuard:
-
-     ```bash
-     sudo systemctl start wg-quick@wg0
-     sudo systemctl enable wg-quick@wg0
-     ```
 
 4. **Проверьте название интерфейсов сети**:
    - Для этого выполните команду:
@@ -63,6 +53,10 @@
      ```
 
    - Убедитесь, что вы знаете названия входного и выходного интерфейсов, например, `enp0s0` и `enp1s0`.
+   
+5. **Проверьте какая у вас маска подсети**
+
+![networks2](https://github.com/user-attachments/assets/f833b014-34dc-4806-8160-60c0793babf7)
 
 ### ⚖️ Шаги настройки
 
