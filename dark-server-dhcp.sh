@@ -53,18 +53,5 @@ echo "Настраиваем WireGuard..."
 systemctl enable wg-quick@wg0
 systemctl start wg-quick@wg0
 
-echo "Настраиваем NAT через UFW..."
-UFW_RULES="/etc/ufw/before.rules"
-sed -i '/\*nat/a :POSTROUTING ACCEPT [0:0]\n-A POSTROUTING -s 192.168.'$SUBNET'.0/24 -o wg0 -j MASQUERADE\nCOMMIT' $UFW_RULES
-sed -i '/#net\/ipv4\/ip_forward=1/s/^#//g' /etc/ufw/sysctl.conf
-
-echo "Настраиваем политики UFW..."
-ufw default deny incoming
-ufw default allow outgoing
-ufw default allow routed
-
-ufw allow ssh
-ufw allow in on $OUTPUT_INTERFACE to any
-ufw enable
 
 echo "Настройка завершена! Перезагрузите сервер, чтобы изменения вступили в силу."
