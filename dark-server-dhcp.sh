@@ -18,11 +18,11 @@ network:
     $OUTPUT_INTERFACE:
       dhcp4: false
       addresses:
-        - 8.8.8.8 
-        - 8.8.4.4
+        - 192.168.$SUBNET.1/24
       nameservers:
         addresses:
-          - 192.168.$SUBNET.1
+          - 8.8.8.8 
+          - 8.8.4.4
       optional: true
     $INPUT_INTERFACE:
       dhcp4: true
