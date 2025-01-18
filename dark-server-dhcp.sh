@@ -21,8 +21,7 @@ network:
         - 192.168.$SUBNET.1/24
       nameservers:
         addresses:
-          - 8.8.8.8 
-          - 8.8.4.4
+          - 192.168.$SUBNET.1
       optional: true
     $INPUT_INTERFACE:
       dhcp4: true
@@ -32,6 +31,9 @@ netplan apply
 echo "Настраиваем DHCP-сервер..."
 DHCP_CONFIG="/etc/dhcp/dhcpd.conf"
 cat <<EOF > $DHCP_CONFIG
+option domain-name "server.dark";
+option domain-name-servers 8.8.8.8, 8.8.4.4;
+
 default-lease-time 600;
 max-lease-time 7200;
 
@@ -39,11 +41,17 @@ ddns-update-style none;
 
 authoritative;
 
+server-name DARK-SERVER;
+ignore client-updates;
+
 subnet 192.168.$SUBNET.0 netmask 255.255.255.0 {
   option routers 192.168.$SUBNET.1;
   option broadcast-address 192.168.$SUBNET.255;
+  option domain-name "server.dark";
   range 192.168.$SUBNET.2 192.168.$SUBNET.254;
   option domain-name-servers 8.8.8.8, 8.8.4.4;
+  default-lease-time 43200;
+  max-lease-time 86400;
 }
 EOF
 
